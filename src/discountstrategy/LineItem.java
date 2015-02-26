@@ -13,9 +13,6 @@ public class LineItem {
     private int qty;
     private double runningItemTotal;
     private Product product;
-    private final String LINEITEMINFO =  product.getProductId() + "\t            " + product.getName()
-                + "\t   " + qty + "\t\t  " + product.getPrice()+ "\t             "
-                + getTotalDiscount()+ "\t";;
 
     public LineItem(Product product, int qty) {
         this.qty = qty;
@@ -57,7 +54,9 @@ public class LineItem {
      public String getLineItemData() {
      
         
-        return LINEITEMINFO;
+     return product.getProductId() + "\t            " + product.getName()
+                + "\t   " + qty + "\t\t  " + product.getPrice()+ "\t             "
+                + getTotalDiscount()+ "\t";
                
     }
     
