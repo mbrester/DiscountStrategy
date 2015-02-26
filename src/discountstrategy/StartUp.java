@@ -18,7 +18,13 @@ public class StartUp {
         register.addProduct("111", 2);
         register.addProduct("113", 50);
         register.endSale();
-        
+        register.startSale("bbb",new ConsoleReceipt(new FakeDB()));
+        register.addProduct("112", 3);
+        register.endSale();
+        register.startSale("ccc", new ConsoleReceipt(new FakeDB()));
+        register.addProduct("111", 5);
+        register.addProduct("112", 5);
+        register.endSale();
         
         
         

@@ -30,6 +30,7 @@ public class Register {
     
     public void endSale(){
         receiptStrategy.printReceipt();
+        receiptStrategy = null;
     }
     
 
