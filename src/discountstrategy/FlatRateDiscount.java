@@ -11,13 +11,13 @@ package discountstrategy;
  */
 public class FlatRateDiscount implements DiscountStrategy {
     
-    private double discountRate;
+    private double discountRate = .2;
 
     public FlatRateDiscount() {
     }
 
     public FlatRateDiscount(double discountRate) {
-        this.discountRate = discountRate;
+        setDiscountRate(discountRate);
     }
     
 
@@ -31,11 +31,16 @@ public class FlatRateDiscount implements DiscountStrategy {
         return itemPrice * qty - getDiscountAmt(qty, itemPrice);
     }
 
+    @Override
     public double getDiscountRate() {
         return discountRate;
     }
 
+    @Override
     public void setDiscountRate(double discountRate) {
+        if(discountRate<0 || discountRate>1){
+            throw new IllegalArgumentException("Dicsount rate can not be less than 0 or greater than 1.");
+        }
         this.discountRate = discountRate;
     }
     

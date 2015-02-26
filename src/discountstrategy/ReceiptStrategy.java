@@ -13,9 +13,9 @@ public interface ReceiptStrategy {
 
     public abstract void printReceipt();
 
-    public abstract void addLineItem(LineItem lineItem);
+    public abstract void addLineItem(String productId, int qty);
 
-    public abstract void addCustomer(Customer customer);
+    public abstract void addCustomer(String custId);
 
     public abstract Customer getCustomer();
 
@@ -34,4 +34,6 @@ public interface ReceiptStrategy {
     public abstract void setLineItems(LineItem[] lineItems);
 
     public abstract LineItem[] getLineItems();
+    
+    public abstract void addItemToArray(LineItem lineItem);
 }

@@ -11,25 +11,20 @@ package discountstrategy;
  */
 public class Register {
     private ReceiptStrategy receiptStrategy;
-    private DataStrategy dB;
-    private Customer customer;
-   ;
 
-    public Register(ReceiptStrategy reciptStrategy, DataStrategy dB) {
-        this.receiptStrategy = reciptStrategy;
-        this.dB = dB;
+    public Register() {
+       
+       
     }
-    
-    
-    public void startSale(String custId){
-        customer = lookUpCustomer(custId);
-        receiptStrategy.addCustomer(customer);
+ 
+    public void startSale(String custId,ReceiptStrategy reciptStrategy){ 
+        this.receiptStrategy = reciptStrategy;
+        receiptStrategy.addCustomer(custId);
     }
     
     public void addProduct(String productId, int qty){
-        
-        LineItem lineItem = new LineItem(lookUpProduct(productId),qty);
-        receiptStrategy.addLineItem(lineItem);
+    
+        receiptStrategy.addLineItem(productId,qty);
        
     }
     
@@ -46,29 +41,7 @@ public class Register {
         this.receiptStrategy = receiptStrategy;
     }
 
-    public DataStrategy getdB() {
-        return dB;
-    }
 
-    public void setdB(DataStrategy dB) {
-        this.dB = dB;
-    }
-
-    private Customer lookUpCustomer(String custId) {
-        return dB.findCustomer(custId);
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-    
-    private Product lookUpProduct(String productId){
-        return dB.findItem(productId);
-    }
     
     
     

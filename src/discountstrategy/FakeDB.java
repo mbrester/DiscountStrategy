@@ -13,8 +13,8 @@ public class FakeDB implements DataStrategy {
 
     private final Product[] products = {
         new Product("111", "Hat ", 5.00, new PercentOffDiscount(.15)),
-        new Product("112", "T-Shirt", 10.00, new FlatRateDiscount(5)),
-        new Product("113", "Tree", 25.00, new NoDiscount())
+        new Product("112", "T-Shirt", 10.00, new FlatRateDiscount()),
+        new Product("113", "Tree", 25.00, new QtyDiscountWithPercentige(4))
     };
     private Product product = null;
 

@@ -10,7 +10,7 @@ package discountstrategy;
  * @author mbrester1
  */
 public class QtyDiscountWithPercentige implements DiscountStrategy {
-    private double discountRate;
+    private double discountRate = .15;
     private int minQty;
 
     public QtyDiscountWithPercentige(int minQty) {
@@ -18,7 +18,7 @@ public class QtyDiscountWithPercentige implements DiscountStrategy {
     }
 
     public QtyDiscountWithPercentige(double discountRate, int minQty) {
-        this.discountRate = discountRate;
+        setDiscountRate(discountRate);
         this.minQty = minQty;
     }
     
@@ -30,6 +30,9 @@ public class QtyDiscountWithPercentige implements DiscountStrategy {
 
     @Override
     public void setDiscountRate(double discountRate) {
+        if(discountRate<0 || discountRate>1){
+            throw new IllegalArgumentException("Dicsount rate can not be less than 0 or greater than 1.");
+        }
         this.discountRate = discountRate;
     }
  

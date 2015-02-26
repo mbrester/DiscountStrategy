@@ -18,10 +18,19 @@ public class ConsoleReceipt implements ReceiptStrategy {
     private double grandTotal;
     private double totalDiscount;
     private Customer customer;
-    private static final String RECEIPTITEMINFO = "Item Number     Product Name    Quantity   Original Price       Discount      SubTotal";
+    private static final String RECEIPTITEMINFO = "Item Number     Product Name    Quantity   Original Price      Discount      SubTotal";
     private static final String STORENAME = "Kohls Department Store";
     private Date date = new Date();
+    private DataStrategy dB;
 
+    public ConsoleReceipt(DataStrategy dB) {
+        this.dB = dB;
+    }
+
+   
+ 
+    
+    
     @Override
     public void printReceipt() {
         System.out.println(date.toString());
@@ -33,19 +42,20 @@ public class ConsoleReceipt implements ReceiptStrategy {
         for (LineItem lineItem : lineItems) {
             subTotal += lineItem.getRunningItemTotal();
 
-            System.out.println(lineItem.getItemId() + "\t            " + lineItem.getItemId()
-                    + "\t\t   " + lineItem.getQty() + "\t      " + lineItem.getItemPrice() + "\t            "
-                    + lineItem.getTotalDiscount() + "\t\t" + "  " + subTotal);
+            System.out.format(lineItem.getItemId() + "\t            " + lineItem.getItemName()
+                    + "\t   " + lineItem.getQty() + "\t       $" + lineItem.getItemPrice() + "\t\t$-"
+                    + lineItem.getTotalDiscount() + "\t\t$"  + subTotal);
             totalDiscount += lineItem.getTotalDiscount();
+            System.out.println("");
         }
         grandTotal = subTotal;
         System.out.println("________________________________________________________________________________________");
-        System.out.println("                                                        You Saved: " + totalDiscount);
-        System.out.println("                                                      Grand Total: " + grandTotal);
+        System.out.println("                                                        You Saved: $" + totalDiscount);
+        System.out.println("                                                      Grand Total: $" + grandTotal);
     }
 
     @Override
-    public void addLineItem(LineItem lineItem) {
+    public void addItemToArray(LineItem lineItem) {
         LineItem[] tempItems = new LineItem[lineItems.length + 1];
         System.arraycopy(lineItems, 0, tempItems, 0, lineItems.length);
         tempItems[lineItems.length] = lineItem;
@@ -98,8 +108,22 @@ public class ConsoleReceipt implements ReceiptStrategy {
     }
 
     @Override
-    public void addCustomer(Customer customer) {
-        this.customer = customer;
+    public void addCustomer(String custId) {
+        this.customer = lookUpCustomer(custId);
+    }
+    private Customer lookUpCustomer(String custId) {
+        return dB.findCustomer(custId);
+    }
+    private Product lookUpProduct(String productId){
+        return dB.findItem(productId);
+    }
+
+    @Override
+    public void addLineItem(String productId, int qty) {
+         LineItem temp = new LineItem(lookUpProduct(productId),qty);
+         addItemToArray(temp);
+                 
+         
     }
 
 }
