@@ -51,14 +51,7 @@ public class LineItem {
         this.product = product;
     }
     
-     public String getLineItemData() {
      
-        
-     return getItemId() + "\t            " + getItemId()
-                + "\t\t   " + getQty() + "\t\t  " + getItemPrice()+ "\t             "
-                + getTotalDiscount()+ "\t";
-               
-    }    
      public String getItemId(){
          return product.getProductId();
      }

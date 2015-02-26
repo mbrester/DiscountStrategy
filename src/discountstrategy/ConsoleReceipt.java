@@ -21,26 +21,26 @@ public class ConsoleReceipt implements ReceiptStrategy {
     private static final String RECEIPTITEMINFO = "Item Number     Product Name    Quantity   Original Price       Discount      SubTotal";
     private static final String STORENAME = "Kohls Department Store";
     private Date date = new Date();
-           
 
     @Override
     public void printReceipt() {
- System.out.println(date.toString());
-        System.out.println(customer.getName()+ "  Customer ID: " + customer.getCustId());
+        System.out.println(date.toString());
+        System.out.println(customer.getName() + "  Customer ID: " + customer.getCustId());
         System.out.println(STORENAME);
         System.out.println(RECEIPTITEMINFO);
         System.out.println("________________________________________________________________________________________");
         System.out.println("");
         for (LineItem lineItem : lineItems) {
             subTotal += lineItem.getRunningItemTotal();
+
             System.out.println(lineItem.getItemId() + "\t            " + lineItem.getItemId()
-                + "\t\t   " + lineItem.getQty() + "\t      " + lineItem.getItemPrice()+ "\t            "
-                + lineItem.getTotalDiscount()+ "\t\t" + "  " + subTotal);
+                    + "\t\t   " + lineItem.getQty() + "\t      " + lineItem.getItemPrice() + "\t            "
+                    + lineItem.getTotalDiscount() + "\t\t" + "  " + subTotal);
             totalDiscount += lineItem.getTotalDiscount();
         }
         grandTotal = subTotal;
         System.out.println("________________________________________________________________________________________");
-        System.out.println("                                                        You Saved: "+ totalDiscount);
+        System.out.println("                                                        You Saved: " + totalDiscount);
         System.out.println("                                                      Grand Total: " + grandTotal);
     }
 
@@ -101,8 +101,5 @@ public class ConsoleReceipt implements ReceiptStrategy {
     public void addCustomer(Customer customer) {
         this.customer = customer;
     }
-    
-    
-    
 
 }
